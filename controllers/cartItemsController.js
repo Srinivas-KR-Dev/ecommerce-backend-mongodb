@@ -1,18 +1,34 @@
-import { prisma } from "../config/db.js";
+import CartItem from "../models/CartItem.js";
+import DeliveryOption from "../models/DeliveryOption.js";
+import Product from "../models/Product.js";
+
+const attachProductsToCartItems = async (cartItems) => {
+  const productIds = cartItems.map((item) => item.productId);
+  const products = await Product.find({ id: { $in: productIds } })
+    .select("-_id")
+    .lean();
+
+  const productsMap = new Map(products.map((product) => [product.id, product]));
+
+  return cartItems.map((item) => ({
+    ...item,
+    product: productsMap.get(item.productId) || null,
+  }));
+};
 
 const getAllCartItems = async (req, res, next) => {
   try {
     const { expand } = req.query;
-
-    const includeOptions = {};
+    const cartItems = await CartItem.find()
+      .sort({ createdAt: 1 })
+      .select("-_id -createdAt -updatedAt")
+      .lean();
 
     if (expand === "product") {
-      includeOptions.include = {
-        product: true,
-      };
+      const cartItemsWithProducts = await attachProductsToCartItems(cartItems);
+      return res.status(200).json(cartItemsWithProducts);
     }
 
-    const cartItems = await prisma.cartItem.findMany(includeOptions);
     res.status(200).json(cartItems);
   } catch (error) {
     next(error);
@@ -32,9 +48,7 @@ const createCartItem = async (req, res, next) => {
     const quantity = Number(rawQuantity);
 
     //Does the product exist in the catalog?
-    const productIdValid = await prisma.product.findUnique({
-      where: { id: productId },
-    });
+    const productIdValid = await Product.findOne({ id: productId }).lean();
 
     if (!productIdValid) {
       return res
@@ -48,10 +62,9 @@ const createCartItem = async (req, res, next) => {
         .json({ message: "Quantity should be a number between 1 and 10" });
     }
 
-    const existingCartItem = await prisma.cartItem.findUnique({
-      where: { productId },
-      select: { quantity: true },
-    });
+    const existingCartItem = await CartItem.findOne({ productId })
+      .select("quantity -_id")
+      .lean();
 
     const totalProductQuantity = (existingCartItem?.quantity || 0) + quantity;
     //Will the total in cart exceed 10?
@@ -61,11 +74,20 @@ const createCartItem = async (req, res, next) => {
       });
     }
     //Upsert: Update existing or Create new
-    const newCartItem = await prisma.cartItem.upsert({
-      where: { productId },
-      update: { quantity: { increment: quantity } },
-      create: { productId, quantity, deliveryOptionId: "1" },
-    });
+    const newCartItem = await CartItem.findOneAndUpdate(
+      { productId },
+      {
+        $inc: { quantity },
+        $setOnInsert: { deliveryOptionId: "1" },
+      },
+      {
+        new: true,
+        upsert: true,
+        runValidators: true,
+      },
+    )
+      .select("-_id -createdAt -updatedAt")
+      .lean();
 
     res.status(201).json(newCartItem);
   } catch (error) {
@@ -91,9 +113,7 @@ const updateCartItem = async (req, res, next) => {
 
     const deliveryOptionId = rawdeliveryOptionId?.toString();
 
-    const cartItemExists = await prisma.cartItem.findUnique({
-      where: { productId },
-    });
+    const cartItemExists = await CartItem.findOne({ productId }).lean();
 
     //Check if cart item exists
     if (!cartItemExists) {
@@ -105,9 +125,9 @@ const updateCartItem = async (req, res, next) => {
     let updateData = {};
     //Handle Delivery Option Update
     if (deliveryOptionId !== undefined) {
-      const deliveryOptionIdExists = await prisma.deliveryOption.findUnique({
-        where: { id: deliveryOptionId },
-      });
+      const deliveryOptionIdExists = await DeliveryOption.findOne({
+        id: deliveryOptionId,
+      }).lean();
 
       if (!deliveryOptionIdExists)
         return res.status(404).json({ message: "Invalid delivery option" });
@@ -126,9 +146,7 @@ const updateCartItem = async (req, res, next) => {
       }
 
       if (quantity === 0) {
-        await prisma.cartItem.delete({
-          where: { productId },
-        });
+        await CartItem.deleteOne({ productId });
 
         return res.sendStatus(204);
       }
@@ -136,10 +154,13 @@ const updateCartItem = async (req, res, next) => {
       updateData.quantity = quantity;
     }
     //Apply all validated changes (quantity, delivery, or both) at once
-    const updatedCartItem = await prisma.cartItem.update({
-      where: { productId },
-      data: updateData,
-    });
+    const updatedCartItem = await CartItem.findOneAndUpdate(
+      { productId },
+      updateData,
+      { new: true, runValidators: true },
+    )
+      .select("-_id -createdAt -updatedAt")
+      .lean();
 
     res.status(200).json(updatedCartItem);
   } catch (error) {
@@ -151,9 +172,7 @@ const deleteCartItem = async (req, res, next) => {
   try {
     const { productId } = req.params;
 
-    const cartItemExists = await prisma.cartItem.findUnique({
-      where: { productId },
-    });
+    const cartItemExists = await CartItem.findOne({ productId }).lean();
 
     //Check if cart item exists
     if (!cartItemExists) {
@@ -162,9 +181,7 @@ const deleteCartItem = async (req, res, next) => {
         .json({ message: `Product ID ${productId} not found` });
     }
     //Delete cart item
-    await prisma.cartItem.delete({
-      where: { productId },
-    });
+    await CartItem.deleteOne({ productId });
 
     res.sendStatus(204);
   } catch (error) {

@@ -9,5 +9,4 @@ lerna-debug.log*
 .env
 dist
 coverage
-/generated/prisma
-/generated/prisma
+

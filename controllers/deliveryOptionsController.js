@@ -1,11 +1,11 @@
-import { prisma } from '../config/db.js';
+import DeliveryOption from "../models/DeliveryOption.js";
 
 const getAllDeliveryOptions = async (req, res, next) => {
   try {
     const { expand } = req.query;
-    const deliveryOptions = await prisma.deliveryOption.findMany();
+    const deliveryOptions = await DeliveryOption.find().select("-_id").lean();
 
-    if (expand === 'estimatedDeliveryTime') {
+    if (expand === "estimatedDeliveryTime") {
       const deliveryOptionsWithTime = deliveryOptions.map((option) => ({
         ...option,
         estimatedDeliveryTimeMs:

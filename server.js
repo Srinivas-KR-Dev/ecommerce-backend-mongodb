@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import path from "path";
@@ -5,6 +6,7 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import { logger } from "./middleware/logEvents.js";
 import errorHandler from "./middleware/errorHandler.js";
+import connectDB from "./config/dbConn.js";
 import productRoutes from "./routes/api/products.js";
 import deliveryRoute from "./routes/api/deliveryOptions.js";
 import cartItemRoutes from "./routes/api/cartItems.js";
@@ -12,10 +14,6 @@ import orderRoutes from "./routes/api/orders.js";
 import paymentSummaryRoutes from "./routes/api/paymentSummary.js";
 import resetRoutes from "./routes/api/reset.js";
 import mongoose from "mongoose";
-
-BigInt.prototype.toJSON = function () {
-  return Number(this);
-};
 
 const app = express();
 const PORT = process.env.PORT || 5000;
