@@ -104,11 +104,15 @@ npm run seed:cart-items
 Frontend application:  
 https://github.com/Srinivas-KR-Dev/react-ecommerce-typescript
 
-## Architecture Diagram (Optional)
+## Architecture Diagram
 
-<!--
-[Insert architecture diagram here if available]
--->
+```mermaid
+flowchart LR
+    A[React Frontend] -->|HTTP requests| B[Express REST API]
+    B --> C[Controllers]
+    C --> D[Mongoose ODM]
+    D --> E[(MongoDB Atlas)]
+```
 
 ## License
 
