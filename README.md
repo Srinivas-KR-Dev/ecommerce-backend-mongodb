@@ -1,6 +1,13 @@
 # Ecommerce Backend API (React e-commerce)
 
-This project is the **backend API for a React e-commerce application**, built with Node.js, Express, MongoDB, and Mongoose.
+This project is the **backend REST API for a React e-commerce application**, built with Node.js, Express, MongoDB, and Mongoose. The database is hosted using **MongoDB Atlas**.
+
+## Tech Stack
+
+- **Runtime:** Node.js (ES6 Modules)
+- **Framework:** Express.js
+- **Database:** MongoDB Atlas (Mongoose ODM)
+- **Tools:** ESLint, Nodemon, CORS, dotenv
 
 ## Quick Start
 
@@ -10,7 +17,7 @@ npm install
 
 # Setup environment
 cp .env.example .env
-# Add your MongoDB URI to .env
+# Add your MongoDB Atlas URI to .env
 
 # Run development server
 npm run dev
@@ -21,12 +28,11 @@ npm run seed:delivery-options
 npm run seed:cart-items
 ```
 
-## Tech Stack
+## API Base URL
 
-- **Runtime:** Node.js (ES6 Modules)
-- **Framework:** Express.js
-- **Database:** MongoDB with Mongoose ODM
-- **Tools:** ESLint, Nodemon, CORS, dotenv
+```
+http://localhost:6000/api
+```
 
 ## API Endpoints
 
@@ -39,14 +45,28 @@ npm run seed:cart-items
 | GET      | `/api/payment-summary`  | Get order payment details                     |
 | POST     | `/api/reset`            | Reset all data to seed state                  |
 
-## Key Features
+## Example Request WITH RESPONSE
 
-- ✅ Search products by name and keywords
-- ✅ Full CRUD operations for cart, orders, and delivery options
-- ✅ Request logging and error handling middleware
-- ✅ Data validation with Mongoose schemas
-- ✅ CORS enabled for frontend integration
-- ✅ Database seeding scripts
+**Request:**
+
+```
+GET /api/products?search=shirt
+```
+
+**Response:**
+
+```json
+[
+  {
+    "id": "83d4ca15-0f35-48f5-b7a3-1ea210004f2e",
+    "image": "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
+    "name": "Adults Plain Cotton T-Shirt - 2 Pack",
+    "rating": { "stars": 4.5, "count": 56 },
+    "priceCents": 1890,
+    "keywords": ["shirt", "apparel"]
+  }
+]
+```
 
 ## Project Structure
 
@@ -78,6 +98,17 @@ npm run seed:products        # Seed products
 npm run seed:delivery-options
 npm run seed:cart-items
 ```
+
+## Related Project
+
+Frontend application:  
+https://github.com/Srinivas-KR-Dev/react-ecommerce-typescript
+
+## Architecture Diagram (Optional)
+
+<!--
+[Insert architecture diagram here if available]
+-->
 
 ## License
 
