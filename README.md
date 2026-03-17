@@ -1,6 +1,6 @@
-# Ecommerce Backend API
+# Ecommerce Backend API (React e-commerce)
 
-A production-ready Node.js REST API for an ecommerce platform built with Express, MongoDB, and Mongoose.
+This project is the **backend API for a React e-commerce application**, built with Node.js, Express, MongoDB, and Mongoose.
 
 ## Quick Start
 
