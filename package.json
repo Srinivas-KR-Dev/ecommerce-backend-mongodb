@@ -1,8 +1,8 @@
 {
   "name": "ecommerce-backend",
   "version": "1.0.0",
-  "description": "ecommerce-backend-project",
-  "license": "ISC",
+  "description": "A Node.js Express server for an ecommerce platform with MongoDB integration",
+  "license": "MIT",
   "author": "Srinivas KR",
   "type": "module",
   "main": "server.js",
