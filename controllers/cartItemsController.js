@@ -81,7 +81,7 @@ const createCartItem = async (req, res, next) => {
         $setOnInsert: { deliveryOptionId: "1" },
       },
       {
-        new: true,
+        returnDocument: "after",
         upsert: true,
         runValidators: true,
       },
@@ -157,7 +157,7 @@ const updateCartItem = async (req, res, next) => {
     const updatedCartItem = await CartItem.findOneAndUpdate(
       { productId },
       updateData,
-      { new: true, runValidators: true },
+      { returnDocument: "after", runValidators: true },
     )
       .select("-_id -createdAt -updatedAt")
       .lean();

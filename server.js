@@ -16,7 +16,7 @@ import resetRoutes from "./routes/api/reset.js";
 import mongoose from "mongoose";
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 6000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

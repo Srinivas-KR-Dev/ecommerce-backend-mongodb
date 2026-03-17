@@ -1,14 +1,7 @@
 import mongoose from "mongoose";
-import { randomUUID } from "crypto";
 
 const cartItemSchema = new mongoose.Schema(
   {
-    id: {
-      type: String,
-      default: randomUUID,
-      required: true,
-      unique: true,
-    },
     productId: {
       type: String,
       required: true,
