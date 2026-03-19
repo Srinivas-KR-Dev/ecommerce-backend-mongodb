@@ -12,11 +12,12 @@ import deliveryRoute from "./routes/api/deliveryOptions.js";
 import cartItemRoutes from "./routes/api/cartItems.js";
 import orderRoutes from "./routes/api/orders.js";
 import paymentSummaryRoutes from "./routes/api/paymentSummary.js";
+import root from "./routes/root.js";
 import resetRoutes from "./routes/api/reset.js";
 import mongoose from "mongoose";
 
 const app = express();
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 7000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -35,8 +36,11 @@ app.use(express.json());
 
 //serve static files
 app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "/public/dist")));
 
 //routes
+app.use("/", root);
+
 app.use("/api/products", productRoutes);
 app.use("/api/delivery-options", deliveryRoute);
 app.use("/api/cart-items", cartItemRoutes);

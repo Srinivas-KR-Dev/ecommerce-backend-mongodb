@@ -31,7 +31,7 @@ npm run seed:cart-items
 ## API Base URL
 
 ```
-http://localhost:6000/api
+http://localhost:7000/api
 ```
 
 ## API Endpoints
@@ -85,7 +85,7 @@ GET /api/products?search=shirt
 ```
 NODE_ENV=development
 DATABASE_URI=your_mongodb_connection_string
-PORT=6000
+PORT=7000
 ```
 
 ## Available Scripts
