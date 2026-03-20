@@ -36,7 +36,7 @@ app.use(express.json());
 
 //serve static files
 app.use(express.static(path.join(__dirname, "/public")));
-app.use(express.static(path.join(__dirname, "/public/dist")));
+app.use(express.static(path.join(__dirname, "dist")));
 
 //routes
 app.use("/", root);
