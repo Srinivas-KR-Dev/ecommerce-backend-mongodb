@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { randomUUID } from "crypto";
+import mongoose from 'mongoose';
+import { randomUUID } from 'crypto';
 
 const orderSchema = new mongoose.Schema(
   {
@@ -49,4 +49,4 @@ const orderSchema = new mongoose.Schema(
   },
 );
 
-export default mongoose.model("Order", orderSchema);
+export default mongoose.model('Order', orderSchema);

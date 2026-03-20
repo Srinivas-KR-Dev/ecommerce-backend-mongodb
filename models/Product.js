@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { randomUUID } from "crypto";
+import mongoose from 'mongoose';
+import { randomUUID } from 'crypto';
 
 const ratingSchema = new mongoose.Schema(
   {
@@ -56,4 +56,4 @@ const productSchema = new mongoose.Schema(
   },
 );
 
-export default mongoose.model("Product", productSchema);
+export default mongoose.model('Product', productSchema);

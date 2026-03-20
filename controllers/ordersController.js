@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
-import CartItem from "../models/CartItem.js";
-import DeliveryOption from "../models/DeliveryOption.js";
-import Order from "../models/Order.js";
-import Product from "../models/Product.js";
+import mongoose from 'mongoose';
+import CartItem from '../models/CartItem.js';
+import DeliveryOption from '../models/DeliveryOption.js';
+import Order from '../models/Order.js';
+import Product from '../models/Product.js';
 
 const TAX_RATE = 0.1;
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
@@ -25,7 +25,7 @@ const serializeOrder = async (order, expandProducts = false) => {
 
   const productIds = response.products.map((product) => product.productId);
   const products = await Product.find({ id: { $in: productIds } })
-    .select("-_id")
+    .select('-_id')
     .lean();
   const productsMap = new Map(products.map((product) => [product.id, product]));
 
@@ -42,11 +42,11 @@ const getAllOrders = async (req, res, next) => {
     const { expand } = req.query;
     const orders = await Order.find()
       .sort({ orderTimeMs: -1 })
-      .select("-_id")
+      .select('-_id')
       .lean();
 
     const serializedOrders = await Promise.all(
-      orders.map((order) => serializeOrder(order, expand === "products")),
+      orders.map((order) => serializeOrder(order, expand === 'products')),
     );
 
     res.status(200).json(serializedOrders);
@@ -57,18 +57,18 @@ const getAllOrders = async (req, res, next) => {
 
 const createOrder = async (req, res, next) => {
   try {
-    const cartItems = await CartItem.find().select("-_id").lean();
+    const cartItems = await CartItem.find().select('-_id').lean();
 
     if (cartItems.length === 0) {
-      return res.status(400).json({ error: "Cart is empty" });
+      return res.status(400).json({ error: 'Cart is empty' });
     }
 
     const productIds = cartItems.map((item) => item.productId);
     const deliveryOptionIds = cartItems.map((item) => item.deliveryOptionId);
     const [products, deliveryOptions] = await Promise.all([
-      Product.find({ id: { $in: productIds } }).select("-_id").lean(),
+      Product.find({ id: { $in: productIds } }).select('-_id').lean(),
       DeliveryOption.find({ id: { $in: deliveryOptionIds } })
-        .select("-_id")
+        .select('-_id')
         .lean(),
     ]);
 
@@ -86,7 +86,7 @@ const createOrder = async (req, res, next) => {
       const deliveryOption = deliveryOptionsMap.get(item.deliveryOptionId);
 
       if (!product || !deliveryOption) {
-        throw new Error("Cart contains invalid product or delivery option");
+        throw new Error('Cart contains invalid product or delivery option');
       }
 
       const productCost = product.priceCents * item.quantity;
@@ -152,13 +152,13 @@ const getOrderById = async (req, res, next) => {
     const { orderId } = req.params;
     const { expand } = req.query;
 
-    const order = await Order.findOne({ id: orderId }).select("-_id").lean();
+    const order = await Order.findOne({ id: orderId }).select('-_id').lean();
 
     if (!order) {
-      return res.status(404).json({ error: "Order not found" });
+      return res.status(404).json({ error: 'Order not found' });
     }
 
-    const serializedOrder = await serializeOrder(order, expand === "products");
+    const serializedOrder = await serializeOrder(order, expand === 'products');
 
     res.status(200).json(serializedOrder);
   } catch (error) {

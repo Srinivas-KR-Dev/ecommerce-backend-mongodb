@@ -1,17 +1,17 @@
-import CartItem from "../models/CartItem.js";
-import DeliveryOption from "../models/DeliveryOption.js";
-import Product from "../models/Product.js";
+import CartItem from '../models/CartItem.js';
+import DeliveryOption from '../models/DeliveryOption.js';
+import Product from '../models/Product.js';
 
 const getPaymentSummary = async (req, res, next) => {
   try {
-    const cartItems = await CartItem.find().select("-_id").lean();
+    const cartItems = await CartItem.find().select('-_id').lean();
     const productIds = cartItems.map((item) => item.productId);
     const deliveryOptionIds = cartItems.map((item) => item.deliveryOptionId);
 
     const [products, deliveryOptions] = await Promise.all([
-      Product.find({ id: { $in: productIds } }).select("-_id").lean(),
+      Product.find({ id: { $in: productIds } }).select('-_id').lean(),
       DeliveryOption.find({ id: { $in: deliveryOptionIds } })
-        .select("-_id")
+        .select('-_id')
         .lean(),
     ]);
 

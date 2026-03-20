@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const cartItemSchema = new mongoose.Schema(
   {
@@ -17,7 +17,7 @@ const cartItemSchema = new mongoose.Schema(
     deliveryOptionId: {
       type: String,
       required: true,
-      default: "1",
+      default: '1',
       trim: true,
     },
   },
@@ -27,4 +27,4 @@ const cartItemSchema = new mongoose.Schema(
   },
 );
 
-export default mongoose.model("CartItem", cartItemSchema);
+export default mongoose.model('CartItem', cartItemSchema);

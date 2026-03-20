@@ -1,4 +1,4 @@
-import Product from "../models/Product.js";
+import Product from '../models/Product.js';
 
 const getAllProducts = async (req, res, next) => {
   try {
@@ -6,7 +6,7 @@ const getAllProducts = async (req, res, next) => {
     const filter = {};
 
     if (search?.trim()) {
-      const searchRegex = new RegExp(search.trim(), "i");
+      const searchRegex = new RegExp(search.trim(), 'i');
 
       filter.$or = [
         { name: searchRegex },
@@ -14,7 +14,7 @@ const getAllProducts = async (req, res, next) => {
       ];
     }
 
-    const products = await Product.find(filter).select("-_id").lean();
+    const products = await Product.find(filter).select('-_id').lean();
     res.status(200).json(products);
   } catch (error) {
     next(error);

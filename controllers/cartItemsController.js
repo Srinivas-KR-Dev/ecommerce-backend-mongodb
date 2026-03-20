@@ -1,11 +1,11 @@
-import CartItem from "../models/CartItem.js";
-import DeliveryOption from "../models/DeliveryOption.js";
-import Product from "../models/Product.js";
+import CartItem from '../models/CartItem.js';
+import DeliveryOption from '../models/DeliveryOption.js';
+import Product from '../models/Product.js';
 
 const attachProductsToCartItems = async (cartItems) => {
   const productIds = cartItems.map((item) => item.productId);
   const products = await Product.find({ id: { $in: productIds } })
-    .select("-_id")
+    .select('-_id')
     .lean();
 
   const productsMap = new Map(products.map((product) => [product.id, product]));
@@ -21,10 +21,10 @@ const getAllCartItems = async (req, res, next) => {
     const { expand } = req.query;
     const cartItems = await CartItem.find()
       .sort({ createdAt: 1 })
-      .select("-_id -createdAt -updatedAt")
+      .select('-_id -createdAt -updatedAt')
       .lean();
 
-    if (expand === "product") {
+    if (expand === 'product') {
       const cartItemsWithProducts = await attachProductsToCartItems(cartItems);
       return res.status(200).json(cartItemsWithProducts);
     }
@@ -41,7 +41,7 @@ const createCartItem = async (req, res, next) => {
     if (!req.body?.productId || !req.body?.quantity) {
       return res
         .status(400)
-        .json({ message: "productId and quantity are required" });
+        .json({ message: 'productId and quantity are required' });
     }
 
     const { productId, quantity: rawQuantity } = req.body;
@@ -59,11 +59,11 @@ const createCartItem = async (req, res, next) => {
     if (!Number.isInteger(quantity) || quantity < 1 || quantity > 10) {
       return res
         .status(400)
-        .json({ message: "Quantity should be a number between 1 and 10" });
+        .json({ message: 'Quantity should be a number between 1 and 10' });
     }
 
     const existingCartItem = await CartItem.findOne({ productId })
-      .select("quantity -_id")
+      .select('quantity -_id')
       .lean();
 
     const totalProductQuantity = (existingCartItem?.quantity || 0) + quantity;
@@ -78,15 +78,15 @@ const createCartItem = async (req, res, next) => {
       { productId },
       {
         $inc: { quantity },
-        $setOnInsert: { deliveryOptionId: "1" },
+        $setOnInsert: { deliveryOptionId: '1' },
       },
       {
-        returnDocument: "after",
+        returnDocument: 'after',
         upsert: true,
         runValidators: true,
       },
     )
-      .select("-_id -createdAt -updatedAt")
+      .select('-_id -createdAt -updatedAt')
       .lean();
 
     res.status(201).json(newCartItem);
@@ -104,7 +104,7 @@ const updateCartItem = async (req, res, next) => {
     ) {
       return res
         .status(400)
-        .json({ message: "deliveryOptionId or quantity is required" });
+        .json({ message: 'deliveryOptionId or quantity is required' });
     }
 
     const { productId } = req.params;
@@ -130,7 +130,7 @@ const updateCartItem = async (req, res, next) => {
       }).lean();
 
       if (!deliveryOptionIdExists)
-        return res.status(404).json({ message: "Invalid delivery option" });
+        return res.status(404).json({ message: 'Invalid delivery option' });
 
       updateData.deliveryOptionId = deliveryOptionId;
     }
@@ -141,7 +141,7 @@ const updateCartItem = async (req, res, next) => {
       if (!Number.isInteger(quantity) || quantity < 0 || quantity > 10) {
         return res.status(400).json({
           message:
-            "Quantity must be a number and not be greater than 10 or lesser than 0",
+            'Quantity must be a number and not be greater than 10 or lesser than 0',
         });
       }
 
@@ -157,9 +157,9 @@ const updateCartItem = async (req, res, next) => {
     const updatedCartItem = await CartItem.findOneAndUpdate(
       { productId },
       updateData,
-      { returnDocument: "after", runValidators: true },
+      { returnDocument: 'after', runValidators: true },
     )
-      .select("-_id -createdAt -updatedAt")
+      .select('-_id -createdAt -updatedAt')
       .lean();
 
     res.status(200).json(updatedCartItem);

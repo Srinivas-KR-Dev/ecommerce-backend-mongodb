@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const deliveryOptionSchema = new mongoose.Schema(
   {
@@ -24,4 +24,4 @@ const deliveryOptionSchema = new mongoose.Schema(
   },
 );
 
-export default mongoose.model("DeliveryOption", deliveryOptionSchema);
+export default mongoose.model('DeliveryOption', deliveryOptionSchema);

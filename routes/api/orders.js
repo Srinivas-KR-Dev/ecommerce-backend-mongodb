@@ -1,13 +1,13 @@
-import express from "express";
-import ordersController from "../../controllers/ordersController.js";
+import express from 'express';
+import ordersController from '../../controllers/ordersController.js';
 
 const router = express.Router();
 
 router
-  .route("/")
+  .route('/')
   .get(ordersController.getAllOrders)
   .post(ordersController.createOrder);
 
-router.route("/:orderId").get(ordersController.getOrderById);
+router.route('/:orderId').get(ordersController.getOrderById);
 
 export default router;
