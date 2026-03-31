@@ -8,6 +8,7 @@ import { logger } from './middleware/logEvents.js';
 import errorHandler from './middleware/errorHandler.js';
 import connectDB from './config/dbConn.js';
 import productRoutes from './routes/api/products.js';
+import aiSearchRoutes from './routes/api/aiSearch.js';
 import deliveryRoute from './routes/api/deliveryOptions.js';
 import cartItemRoutes from './routes/api/cartItems.js';
 import orderRoutes from './routes/api/orders.js';
@@ -42,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/', root);
 
 app.use('/api/products', productRoutes);
+app.use('/api/ai-search', aiSearchRoutes);
 app.use('/api/delivery-options', deliveryRoute);
 app.use('/api/cart-items', cartItemRoutes);
 app.use('/api/orders', orderRoutes);
