@@ -17,6 +17,7 @@
     "seed:cart-items": "node scripts/seedCartItems.js"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "archiver": "^6.0.2",
     "cors": "^2.8.6",
     "dayjs": "^1.11.19",
