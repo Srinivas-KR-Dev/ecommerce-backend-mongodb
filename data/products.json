@@ -97,8 +97,10 @@
                    },
         "priceCents":  99900,
         "keywords":  [
-                         "sweaters",
-                         "apparel"
+                         "sweater",
+                         "oversized sweater",
+                         "womens",
+                         "winter wear"
                      ]
     },
     {
@@ -161,10 +163,11 @@
                    },
         "priceCents":  149900,
         "keywords":  [
-                         "womens",
                          "shoes",
                          "heels",
-                         "sandals"
+                         "sandals",
+                         "footwear",
+                         "womens"
                      ]
     },
     {
@@ -237,8 +240,10 @@
         "priceCents":  249900,
         "keywords":  [
                          "shoes",
-                         "running shoes",
-                         "footwear"
+                         "sneakers",
+                         "athletic shoes",
+                         "footwear",
+                         "running"
                      ]
     },
     {
@@ -268,7 +273,8 @@
         "priceCents":  229900,
         "keywords":  [
                          "shoes",
-                         "running shoes",
+                         "sneakers",
+                         "athletic shoes",
                          "footwear",
                          "mens"
                      ]
@@ -283,8 +289,10 @@
                    },
         "priceCents":  149900,
         "keywords":  [
-                         "sweaters",
-                         "apparel"
+                         "sweater",
+                         "wool sweater",
+                         "mens",
+                         "winter wear"
                      ]
     },
     {
@@ -314,8 +322,9 @@
         "keywords":  [
                          "shoes",
                          "flats",
-                         "womens",
-                         "footwear"
+                         "ballet flats",
+                         "footwear",
+                         "womens"
                      ]
     },
     {
@@ -438,9 +447,11 @@
                    },
         "priceCents":  199900,
         "keywords":  [
+                         "shoes",
+                         "sneakers",
                          "footwear",
-                         "men",
-                         "sneakers"
+                         "mens",
+                         "casual shoes"
                      ]
     },
     {
@@ -572,8 +583,9 @@
         "priceCents":  199900,
         "keywords":  [
                          "shoes",
-                         "running shoes",
-                         "footwear"
+                         "skateboard shoes",
+                         "footwear",
+                         "athletic"
                      ]
     },
     {
@@ -601,10 +613,11 @@
                    },
         "priceCents":  129900,
         "keywords":  [
-                         "sweaters",
-                         "hoodies",
-                         "apparel",
-                         "mens"
+                         "hoodie",
+                         "fleece hoodie",
+                         "sweatshirt",
+                         "mens",
+                         "winter wear"
                      ]
     },
     {
