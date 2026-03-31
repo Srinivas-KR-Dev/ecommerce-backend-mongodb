@@ -11,7 +11,12 @@
         "keywords":  [
                          "socks",
                          "sports",
-                         "apparel"
+                         "cotton socks",
+                         "athletic socks",
+                         "ankle socks",
+                         "gym socks",
+                         "pack of 6",
+                         "mens"
                      ]
     },
     {
@@ -24,8 +29,12 @@
                    },
         "priceCents":  149900,
         "keywords":  [
+                         "basketball",
                          "sports",
-                         "basketballs"
+                         "ball",
+                         "outdoor sports",
+                         "indoor sports",
+                         "gift for him"
                      ]
     },
     {
@@ -39,8 +48,12 @@
         "priceCents":  59900,
         "keywords":  [
                          "tshirts",
-                         "apparel",
-                         "mens"
+                         "mens",
+                         "cotton tshirt",
+                         "casual wear",
+                         "everyday wear",
+                         "pack of 2",
+                         "basic tshirt"
                      ]
     },
     {
@@ -55,7 +68,11 @@
         "keywords":  [
                          "toaster",
                          "kitchen",
-                         "appliances"
+                         "appliances",
+                         "bread toaster",
+                         "breakfast appliance",
+                         "electric toaster",
+                         "kitchen gadget"
                      ]
     },
     {
@@ -70,7 +87,11 @@
         "keywords":  [
                          "plates",
                          "kitchen",
-                         "dining"
+                         "dining",
+                         "dinner plates",
+                         "crockery",
+                         "dinnerware",
+                         "serving plates"
                      ]
     },
     {
@@ -83,8 +104,14 @@
                    },
         "priceCents":  249900,
         "keywords":  [
+                         "cookware",
                          "kitchen",
-                         "cookware"
+                         "cooking pots",
+                         "non-stick",
+                         "pot set",
+                         "kadai",
+                         "kitchen set",
+                         "cooking set"
                      ]
     },
     {
@@ -98,9 +125,12 @@
         "priceCents":  99900,
         "keywords":  [
                          "sweater",
-                         "oversized sweater",
                          "womens",
-                         "winter wear"
+                         "oversized sweater",
+                         "winter wear",
+                         "warm clothes",
+                         "cozy wear",
+                         "casual wear"
                      ]
     },
     {
@@ -113,11 +143,13 @@
                    },
         "priceCents":  79900,
         "keywords":  [
-                         "bathroom",
-                         "washroom",
-                         "restroom",
                          "towels",
-                         "bath towels"
+                         "bathroom",
+                         "bath towels",
+                         "luxury towels",
+                         "soft towels",
+                         "bathroom accessories",
+                         "gift set"
                      ]
     },
     {
@@ -130,10 +162,12 @@
                    },
         "priceCents":  34900,
         "keywords":  [
-                         "kleenex",
                          "tissues",
-                         "kitchen",
-                         "napkins"
+                         "facial tissues",
+                         "tissue paper",
+                         "soft tissues",
+                         "tissue box",
+                         "household"
                      ]
     },
     {
@@ -146,11 +180,13 @@
                    },
         "priceCents":  119900,
         "keywords":  [
-                         "robe",
-                         "swimsuit",
-                         "swimming",
-                         "bathing",
-                         "apparel"
+                         "dress",
+                         "womens",
+                         "beach dress",
+                         "summer dress",
+                         "casual dress",
+                         "vacation wear",
+                         "holiday wear"
                      ]
     },
     {
@@ -167,7 +203,10 @@
                          "heels",
                          "sandals",
                          "footwear",
-                         "womens"
+                         "womens",
+                         "party wear",
+                         "formal shoes",
+                         "gift for her"
                      ]
     },
     {
@@ -180,8 +219,13 @@
                    },
         "priceCents":  69900,
         "keywords":  [
+                         "sunglasses",
                          "accessories",
-                         "shades"
+                         "eyewear",
+                         "round sunglasses",
+                         "UV protection",
+                         "summer accessories",
+                         "gift for womens"
                      ]
     },
     {
@@ -194,9 +238,14 @@
                    },
         "priceCents":  199900,
         "keywords":  [
-                         "bedroom",
                          "curtains",
-                         "home"
+                         "bedroom",
+                         "home",
+                         "blackout curtains",
+                         "window curtains",
+                         "room darkening",
+                         "home decor",
+                         "living room"
                      ]
     },
     {
@@ -210,8 +259,11 @@
         "priceCents":  79900,
         "keywords":  [
                          "shorts",
-                         "apparel",
-                         "womens"
+                         "womens",
+                         "denim shorts",
+                         "jean shorts",
+                         "summer wear",
+                         "casual wear"
                      ]
     },
     {
@@ -224,9 +276,13 @@
                    },
         "priceCents":  129900,
         "keywords":  [
-                         "water kettle",
+                         "kettle",
                          "appliances",
-                         "kitchen"
+                         "kitchen",
+                         "electric kettle",
+                         "water boiler",
+                         "tea kettle",
+                         "kitchen gadget"
                      ]
     },
     {
@@ -241,9 +297,12 @@
         "keywords":  [
                          "shoes",
                          "sneakers",
-                         "athletic shoes",
                          "footwear",
-                         "running"
+                         "athletic shoes",
+                         "running shoes",
+                         "waterproof shoes",
+                         "gym shoes",
+                         "sports shoes"
                      ]
     },
     {
@@ -257,9 +316,13 @@
         "priceCents":  59900,
         "keywords":  [
                          "hats",
-                         "straw hats",
-                         "summer",
-                         "apparel"
+                         "sun hat",
+                         "straw hat",
+                         "beach hat",
+                         "summer hat",
+                         "womens",
+                         "outdoor hat",
+                         "UV protection"
                      ]
     },
     {
@@ -274,9 +337,13 @@
         "keywords":  [
                          "shoes",
                          "sneakers",
-                         "athletic shoes",
                          "footwear",
-                         "mens"
+                         "mens",
+                         "athletic shoes",
+                         "running shoes",
+                         "gym shoes",
+                         "casual shoes",
+                         "sports shoes"
                      ]
     },
     {
@@ -290,9 +357,12 @@
         "priceCents":  149900,
         "keywords":  [
                          "sweater",
-                         "wool sweater",
                          "mens",
-                         "winter wear"
+                         "wool sweater",
+                         "winter wear",
+                         "warm clothes",
+                         "cold weather",
+                         "knit sweater"
                      ]
     },
     {
@@ -307,7 +377,11 @@
         "keywords":  [
                          "bathmat",
                          "bathroom",
-                         "home"
+                         "home",
+                         "bath mat",
+                         "anti-slip mat",
+                         "shower mat",
+                         "bathroom accessories"
                      ]
     },
     {
@@ -322,9 +396,12 @@
         "keywords":  [
                          "shoes",
                          "flats",
-                         "ballet flats",
                          "footwear",
-                         "womens"
+                         "womens",
+                         "ballet flats",
+                         "casual shoes",
+                         "office shoes",
+                         "comfortable shoes"
                      ]
     },
     {
@@ -337,10 +414,13 @@
                    },
         "priceCents":  79900,
         "keywords":  [
-                         "tshirts",
                          "shirts",
-                         "apparel",
-                         "mens"
+                         "mens",
+                         "polo shirt",
+                         "collar shirt",
+                         "office wear",
+                         "formal wear",
+                         "golf shirt"
                      ]
     },
     {
@@ -353,8 +433,13 @@
                    },
         "priceCents":  44900,
         "keywords":  [
-                         "bathroom",
-                         "cleaning"
+                         "cleaning",
+                         "laundry",
+                         "detergent",
+                         "washing powder",
+                         "laundry tabs",
+                         "household cleaning",
+                         "washing machine"
                      ]
     },
     {
@@ -367,9 +452,14 @@
                    },
         "priceCents":  199900,
         "keywords":  [
+                         "earrings",
                          "jewelry",
-                         "accessories",
-                         "womens"
+                         "womens",
+                         "silver earrings",
+                         "sterling silver",
+                         "gift for her",
+                         "party wear",
+                         "fashion jewelry"
                      ]
     },
     {
@@ -382,11 +472,14 @@
                    },
         "priceCents":  249900,
         "keywords":  [
-                         "bedroom",
                          "bed sheets",
-                         "sheets",
-                         "covers",
-                         "home"
+                         "bedroom",
+                         "home",
+                         "duvet cover",
+                         "bedding",
+                         "quilt cover",
+                         "bed linen",
+                         "home decor"
                      ]
     },
     {
@@ -399,11 +492,14 @@
                    },
         "priceCents":  39900,
         "keywords":  [
+                         "beanie",
                          "hats",
-                         "winter hats",
-                         "beanies",
-                         "apparel",
-                         "womens"
+                         "womens",
+                         "winter hat",
+                         "knit cap",
+                         "warm hat",
+                         "winter accessories",
+                         "cold weather"
                      ]
     },
     {
@@ -417,8 +513,12 @@
         "priceCents":  129900,
         "keywords":  [
                          "pants",
-                         "apparel",
-                         "mens"
+                         "mens",
+                         "chinos",
+                         "trousers",
+                         "office wear",
+                         "formal pants",
+                         "casual pants"
                      ]
     },
     {
@@ -432,9 +532,12 @@
         "priceCents":  89900,
         "keywords":  [
                          "sunglasses",
-                         "glasses",
                          "accessories",
-                         "shades"
+                         "mens",
+                         "eyewear",
+                         "aviator sunglasses",
+                         "UV protection",
+                         "gift for him"
                      ]
     },
     {
@@ -451,7 +554,10 @@
                          "sneakers",
                          "footwear",
                          "mens",
-                         "casual shoes"
+                         "casual shoes",
+                         "loafers",
+                         "flat shoes",
+                         "brown shoes"
                      ]
     },
     {
@@ -464,8 +570,14 @@
                    },
         "priceCents":  349900,
         "keywords":  [
+                         "cookware",
+                         "kitchen",
                          "cooking set",
-                         "kitchen"
+                         "non-stick",
+                         "frying pan",
+                         "pan set",
+                         "kitchen set",
+                         "kadai"
                      ]
     },
     {
@@ -478,10 +590,14 @@
                    },
         "priceCents":  149900,
         "keywords":  [
+                         "mirror",
                          "bathroom",
-                         "washroom",
-                         "mirrors",
-                         "home"
+                         "home",
+                         "vanity mirror",
+                         "LED mirror",
+                         "makeup mirror",
+                         "dressing table mirror",
+                         "gift for her"
                      ]
     },
     {
@@ -495,8 +611,12 @@
         "priceCents":  89900,
         "keywords":  [
                          "pants",
-                         "apparel",
-                         "womens"
+                         "womens",
+                         "lounge pants",
+                         "pyjamas",
+                         "comfortable pants",
+                         "home wear",
+                         "casual wear"
                      ]
     },
     {
@@ -509,8 +629,14 @@
                    },
         "priceCents":  79900,
         "keywords":  [
-                         "accessories",
-                         "womens"
+                         "earrings",
+                         "jewelry",
+                         "womens",
+                         "stud earrings",
+                         "crystal earrings",
+                         "gift for her",
+                         "fashion jewelry",
+                         "accessories"
                      ]
     },
     {
@@ -524,7 +650,12 @@
         "priceCents":  69900,
         "keywords":  [
                          "food containers",
-                         "kitchen"
+                         "kitchen",
+                         "glass containers",
+                         "storage containers",
+                         "meal prep",
+                         "airtight containers",
+                         "lunch box"
                      ]
     },
     {
@@ -537,9 +668,13 @@
                    },
         "priceCents":  499900,
         "keywords":  [
-                         "espresso makers",
+                         "espresso maker",
+                         "appliances",
                          "kitchen",
-                         "appliances"
+                         "coffee maker",
+                         "espresso machine",
+                         "coffee machine",
+                         "kitchen gadget"
                      ]
     },
     {
@@ -552,9 +687,14 @@
                    },
         "priceCents":  219900,
         "keywords":  [
+                         "curtains",
                          "bedroom",
                          "home",
-                         "curtains"
+                         "blackout curtains",
+                         "window curtains",
+                         "room darkening",
+                         "home decor",
+                         "living room"
                      ]
     },
     {
@@ -567,9 +707,13 @@
                    },
         "priceCents":  69900,
         "keywords":  [
+                         "towels",
                          "bathroom",
                          "home",
-                         "towels"
+                         "bath towels",
+                         "soft towels",
+                         "bathroom accessories",
+                         "gift set"
                      ]
     },
     {
@@ -583,9 +727,12 @@
         "priceCents":  199900,
         "keywords":  [
                          "shoes",
-                         "skateboard shoes",
                          "footwear",
-                         "athletic"
+                         "skateboard shoes",
+                         "athletic shoes",
+                         "sports shoes",
+                         "casual shoes",
+                         "street shoes"
                      ]
     },
     {
@@ -598,9 +745,14 @@
                    },
         "priceCents":  329900,
         "keywords":  [
-                         "food blenders",
+                         "blender",
+                         "appliances",
                          "kitchen",
-                         "appliances"
+                         "mixer",
+                         "juicer",
+                         "smoothie maker",
+                         "kitchen gadget",
+                         "food processor"
                      ]
     },
     {
@@ -614,10 +766,12 @@
         "priceCents":  129900,
         "keywords":  [
                          "hoodie",
+                         "mens",
                          "fleece hoodie",
                          "sweatshirt",
-                         "mens",
-                         "winter wear"
+                         "winter wear",
+                         "warm clothes",
+                         "casual wear"
                      ]
     },
     {
@@ -630,8 +784,13 @@
                    },
         "priceCents":  199900,
         "keywords":  [
-                         "bowls set",
-                         "kitchen"
+                         "bowls",
+                         "kitchen",
+                         "bowl set",
+                         "crockery",
+                         "dinnerware",
+                         "serving bowls",
+                         "dining set"
                      ]
     },
     {
@@ -644,9 +803,12 @@
                    },
         "priceCents":  29900,
         "keywords":  [
-                         "kitchen",
                          "kitchen towels",
-                         "tissues"
+                         "kitchen",
+                         "paper towels",
+                         "cleaning",
+                         "household",
+                         "absorbent towels"
                      ]
     }
 ]
