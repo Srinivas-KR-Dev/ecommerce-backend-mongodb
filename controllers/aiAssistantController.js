@@ -115,7 +115,7 @@ const getLocalMatches = (message, products) => {
 const buildPrompt = (message, products) => {
   const lines = products.map(
     (product) =>
-      `- id: ${product.id}\n  Name: ${product.name}\n  Price: Rs.${Math.round(product.priceCents / 100)}\n  Category: ${getProductCategory(product)}\n  Keywords: ${(product.keywords || []).join(', ')}`,
+      `- id: ${product.id}\n  Name: ${product.name}\n  Price: ₹${Math.round(product.priceCents / 100)}\n  Category: ${getProductCategory(product)}\n  Keywords: ${(product.keywords || []).join(', ')}`,
   );
 
   return `
