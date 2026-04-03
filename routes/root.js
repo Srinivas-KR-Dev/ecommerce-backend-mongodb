@@ -9,7 +9,7 @@ const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-router.get(['/', '/index', '/index.html'], (req, res) => {
+router.get(/.*/, (req, res) => {
   const indexPath = path.join(__dirname, '..', 'dist', 'index.html');
   if (existsSync(indexPath)) {
     res.sendFile(indexPath);

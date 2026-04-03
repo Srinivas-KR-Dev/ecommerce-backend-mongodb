@@ -41,8 +41,6 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 //routes
-app.use('/', root);
-
 app.use('/api/products', productRoutes);
 app.use('/api/ai-search', aiSearchRoutes);
 app.use('/api/ai-assistant', aiAssistantRoutes);
@@ -51,6 +49,7 @@ app.use('/api/cart-items', cartItemRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payment-summary', paymentSummaryRoutes);
 app.use('/api/reset', resetRoutes);
+app.use('/', root);
 
 //route error handling for undefined routes
 app.all(/.*/, (req, res) => {
