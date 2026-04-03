@@ -2,13 +2,17 @@
 
 This project is the **backend REST API for a React e-commerce application**, built with Node.js, Express, MongoDB, and Mongoose. The database is hosted using **MongoDB Atlas**.
 
-It also serves the frontend `index.html` from the root route when a built frontend exists in `dist/`.
+It also serves the built frontend from `dist/` on the same domain and supports frontend route refreshes such as `/orders` and `/checkout`.
+
+Built a lightweight **RAG-style shopping assistant** using Gemini, MongoDB product data, and backend-side product retrieval before AI response generation.
 
 ## Project Overview
 
 The API provides backend services for:
 
 - product catalog search
+- AI product search using Gemini
+- AI shopping assistant recommendations
 - shopping cart management
 - checkout and payment summary calculation
 - order creation and order history
@@ -16,9 +20,10 @@ The API provides backend services for:
 ## Tech Stack
 
 - **Runtime:** Node.js (ES Modules)
-- **Framework:** Express.js
+- **Framework:** Express.js 5
 - **Database:** MongoDB Atlas
 - **ODM:** Mongoose
+- **AI:** Google Gemini API
 - **Tools:** ESLint, Nodemon, CORS, dotenv
 
 ## Quick Start
@@ -29,7 +34,7 @@ npm install
 
 # Setup environment
 # Create .env from .env.example
-# Add your MongoDB Atlas connection string to .env
+# Add your MongoDB Atlas connection string and Gemini API key
 
 # Seed sample data
 npm run seed:products
@@ -57,6 +62,8 @@ http://localhost:7000/
 | Method       | Endpoint                     | Description                                   |
 | ------------ | ---------------------------- | --------------------------------------------- |
 | `GET`        | `/api/products`              | Get all products (supports `?search=keyword`) |
+| `GET`        | `/api/ai-search`             | AI-powered product search using `?query=`     |
+| `POST`       | `/api/ai-assistant`          | AI shopping assistant reply with products     |
 | `GET`        | `/api/delivery-options`      | Get available delivery methods                |
 | `GET/POST`   | `/api/cart-items`            | Get cart items or add an item                 |
 | `PUT/DELETE` | `/api/cart-items/:productId` | Update or remove a cart item                  |
@@ -65,21 +72,21 @@ http://localhost:7000/
 | `GET`        | `/api/payment-summary`       | Get order payment details                     |
 | `POST`       | `/api/reset`                 | Reset all data to seed state in development   |
 
-## Root Route
+## Frontend Route Handling
 
-`GET /`
+The backend serves `dist/index.html` for non-API `GET` frontend routes when a built frontend exists.
 
-If `dist/index.html` exists, the server returns that file.
-
-Supported root paths:
+Examples:
 
 - `/`
+- `/orders`
+- `/checkout`
 - `/index`
 - `/index.html`
 
-If the file does not exist, the route returns a `404`.
+If `dist/index.html` does not exist, the route returns a `404`.
 
-## Example Request WITH RESPONSE
+## Example Request With Response
 
 **Request:**
 
@@ -99,8 +106,16 @@ GET /api/products?search=shirt
       "stars": 4.5,
       "count": 56
     },
-    "priceCents": 10799,
-    "keywords": ["tshirts", "apparel", "mens"]
+    "priceCents": 59900,
+    "keywords": [
+      "tshirts",
+      "mens",
+      "cotton tshirt",
+      "casual wear",
+      "everyday wear",
+      "pack of 2",
+      "basic tshirt"
+    ]
   }
 ]
 ```
@@ -109,10 +124,10 @@ GET /api/products?search=shirt
 
 ```text
 ├── config/          MongoDB and Mongoose connection setup
-├── controllers/     Business logic
+├── controllers/     Business logic and AI controllers
 ├── middleware/      Request logging and error handling
 ├── models/          Mongoose schemas
-├── routes/          API endpoints and root route
+├── routes/          API endpoints and frontend root route
 ├── scripts/         Seed scripts
 ├── data/            Seed data
 └── server.js        Entry point
@@ -123,6 +138,7 @@ GET /api/products?search=shirt
 ```env
 NODE_ENV=development
 DATABASE_URI=your_mongodb_atlas_connection_string
+GEMINI_API_KEY=your_gemini_api_key_here
 PORT=7000
 ```
 
@@ -142,7 +158,7 @@ npm run zip                    # Create backup zip
 
 - Static files are served from `public/`
 - Static files are also served from `dist/`
-- Unknown browser routes return `views/404.html`
+- Non-API frontend `GET` routes return `dist/index.html` when available
 - Unknown API routes return JSON: `{ "error": "404 not found" }`
 
 ## Related Project
@@ -158,6 +174,7 @@ flowchart LR
     B --> C[Controllers]
     C --> D[Mongoose ODM]
     D --> E[(MongoDB Atlas)]
+    C --> F[Gemini API]
 ```
 
 ## License
