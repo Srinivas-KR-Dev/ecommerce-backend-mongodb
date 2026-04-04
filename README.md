@@ -208,11 +208,10 @@ npm run zip                    # Create backup zip
 flowchart LR
     A[React Frontend] -->|HTTP requests| B[Express REST API]
     B --> C[Controllers]
-    C --> D[Mongoose ODM]
+    C -->|product retrieval| D[Mongoose ODM]
     D --> E[(MongoDB Atlas)]
-    C -->|keyword pre-filter| D
-    C -->|grounded prompt| F[Gemini API]
-    F -->|structured JSON| C
+    C -->|grounded prompt with retrieved products| F[Gemini API]
+    F -->|structured JSON response| C
 ```
 
 ## Author
