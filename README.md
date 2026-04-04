@@ -212,6 +212,7 @@ flowchart LR
     D --> E[(MongoDB Atlas)]
     C -->|grounded prompt with retrieved products| F[Gemini API]
     F -->|structured JSON response| C
+    F -->|structured JSON response| C
 ```
 
 ## Author
