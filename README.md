@@ -1,10 +1,14 @@
-# Ecommerce Backend API (React e-commerce)
+# Ecommerce Backend API (AI-Powered E-Commerce)
 
-This project is the **backend REST API for a React e-commerce application**, built with Node.js, Express, MongoDB, and Mongoose. The database is hosted using **MongoDB Atlas**.
+This project is a **production-style backend API for an AI-powered e-commerce application**, built with Node.js, Express, MongoDB, and Mongoose.
 
-It also serves the built frontend from `dist/` on the same domain and supports frontend route refreshes such as `/orders` and `/checkout`.
+It includes **AI-driven product search and a conversational shopping assistant**, designed using a retrieval-augmented pattern to ensure accurate, context-aware, and reliable responses.
 
-Built a lightweight **RAG-style shopping assistant** using Gemini, MongoDB product data, and backend-side product retrieval before AI response generation.
+The backend also serves the built frontend from `dist/` and supports client-side routing.
+
+It also serves the built frontend from `dist/` on the same domain and supports client-side routing and page refresh handling such as `/orders` and `/checkout`.
+
+This backend includes a retrieval-augmented AI shopping assistant (RAG-style pattern) — products are retrieved from MongoDB and used to ground Gemini responses before generation, reducing hallucination and improving recommendation accuracy.
 
 ## Project Overview
 
@@ -16,6 +20,40 @@ The API provides backend services for:
 - shopping cart management
 - checkout and payment summary calculation
 - order creation and order history
+
+## AI System Design
+
+This backend implements a **retrieval-augmented pattern (RAG-style)** for AI features.
+
+### Flow:
+
+User Query  
+↓  
+Product Retrieval (MongoDB keyword + scoring-based matching)  
+↓  
+Context Injection (top relevant products)  
+↓  
+LLM (Google Gemini API)  
+↓  
+Structured AI Response  
+
+### Key Design Decisions:
+
+- Retrieval-first approach to reduce hallucination  
+- Controlled prompt design to ensure grounded responses  
+- Structured JSON output for predictable AI behavior  
+- Hybrid system (AI + deterministic ranking) for reliability  
+
+This approach ensures AI responses are accurate, explainable, and production-safe.
+
+## Why This Backend Matters
+
+- Demonstrates real-world AI integration in a backend system  
+- Shows how to ground LLM responses using database retrieval  
+- Combines traditional backend architecture with AI capabilities  
+- Designed for reliability, scalability, and production use  
+
+This is not just an API — it is an AI-enabled system designed with real-world constraints in mind.
 
 ## Tech Stack
 
@@ -62,8 +100,8 @@ http://localhost:7000/
 | Method       | Endpoint                     | Description                                   |
 | ------------ | ---------------------------- | --------------------------------------------- |
 | `GET`        | `/api/products`              | Get all products (supports `?search=keyword`) |
-| `GET`        | `/api/ai-search`             | AI-powered product search using `?query=`     |
-| `POST`       | `/api/ai-assistant`          | AI shopping assistant reply with products     |
+| `GET`        | `/api/ai-search`             | AI-powered semantic product search (intent-based) using `?query=`     |
+| `POST`       | `/api/ai-assistant`          | AI shopping assistant with context-aware recommendations with products     |
 | `GET`        | `/api/delivery-options`      | Get available delivery methods                |
 | `GET/POST`   | `/api/cart-items`            | Get cart items or add an item                 |
 | `PUT/DELETE` | `/api/cart-items/:productId` | Update or remove a cart item                  |
@@ -161,10 +199,9 @@ npm run zip                    # Create backup zip
 - Non-API frontend `GET` routes return `dist/index.html` when available
 - Unknown API routes return JSON: `{ "error": "404 not found" }`
 
-## Related Project
-
-Frontend application:
-https://github.com/Srinivas-KR-Dev/react-ecommerce-typescript
+## Related Projects
+- [React Frontend — TypeScript](https://github.com/Srinivas-KR-Dev/react-ecommerce-typescript-ai)
+- [Backend — PostgreSQL + Prisma](https://github.com/Srinivas-KR-Dev/ecommerce-backend-postgres-prisma)
 
 ## Architecture Diagram
 
@@ -174,8 +211,13 @@ flowchart LR
     B --> C[Controllers]
     C --> D[Mongoose ODM]
     D --> E[(MongoDB Atlas)]
-    C --> F[Gemini API]
+    C -->|retrieval layer (keyword + scoring)| D
+    C -->|grounded prompt| F[Gemini API]
+    F -->|structured JSON| C
 ```
+
+## Author
+**Srinivas K R** — [LinkedIn](https://www.linkedin.com/in/srinivas-kr-dev) · [GitHub](https://github.com/Srinivas-KR-Dev)
 
 ## License
 
