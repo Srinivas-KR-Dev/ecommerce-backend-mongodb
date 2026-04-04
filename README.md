@@ -4,11 +4,9 @@ This project is a **production-style backend API for an AI-powered e-commerce ap
 
 It includes **AI-driven product search and a conversational shopping assistant**, designed using a retrieval-augmented pattern to ensure accurate, context-aware, and reliable responses.
 
-The backend also serves the built frontend from `dist/` and supports client-side routing.
+The backend also serves the built frontend from `dist/` on the same domain and supports client-side routing and page refresh handling such as `/orders` and `/checkout`.
 
-It also serves the built frontend from `dist/` on the same domain and supports client-side routing and page refresh handling such as `/orders` and `/checkout`.
-
-This backend includes a retrieval-augmented AI shopping assistant (RAG-style pattern) — products are retrieved from MongoDB and used to ground Gemini responses before generation, reducing hallucination and improving recommendation accuracy.
+This backend includes a retrieval-augmented AI shopping assistant (RAG-style pattern) - products are retrieved from MongoDB and used to ground Gemini responses before generation, reducing hallucination and improving recommendation accuracy.
 
 ## Project Overview
 
@@ -25,35 +23,35 @@ The API provides backend services for:
 
 This backend implements a **retrieval-augmented pattern (RAG-style)** for AI features.
 
-### Flow:
+### Flow
 
-User Query  
-↓  
-Product Retrieval (MongoDB keyword + scoring-based matching)  
-↓  
-Context Injection (top relevant products)  
-↓  
-LLM (Google Gemini API)  
-↓  
-Structured AI Response  
+User Query
+↓
+Product Retrieval (MongoDB keyword + scoring-based matching)
+↓
+Context Injection (top relevant products)
+↓
+LLM (Google Gemini API)
+↓
+Structured AI Response
 
-### Key Design Decisions:
+### Key Design Decisions
 
-- Retrieval-first approach to reduce hallucination  
-- Controlled prompt design to ensure grounded responses  
-- Structured JSON output for predictable AI behavior  
-- Hybrid system (AI + deterministic ranking) for reliability  
+- Retrieval-first approach to reduce hallucination
+- Controlled prompt design to ensure grounded responses
+- Structured JSON output for predictable AI behavior
+- Hybrid system (AI + deterministic ranking) for reliability
 
-This approach ensures AI responses are accurate, explainable, and production-safe.
+This approach helps keep AI responses accurate, explainable, and safer for real-world use.
 
 ## Why This Backend Matters
 
-- Demonstrates real-world AI integration in a backend system  
-- Shows how to ground LLM responses using database retrieval  
-- Combines traditional backend architecture with AI capabilities  
-- Designed for reliability, scalability, and production use  
+- Demonstrates real-world AI integration in a backend system
+- Shows how to ground LLM responses using database retrieval
+- Combines traditional backend architecture with AI capabilities
+- Designed for reliability, scalability, and production-style use
 
-This is not just an API — it is an AI-enabled system designed with real-world constraints in mind.
+This is not just an API - it is an AI-enabled system designed with practical constraints in mind.
 
 ## Tech Stack
 
@@ -97,18 +95,18 @@ http://localhost:7000/
 
 ## API Endpoints
 
-| Method       | Endpoint                     | Description                                   |
-| ------------ | ---------------------------- | --------------------------------------------- |
-| `GET`        | `/api/products`              | Get all products (supports `?search=keyword`) |
-| `GET`        | `/api/ai-search`             | AI-powered semantic product search (intent-based) using `?query=`     |
-| `POST`       | `/api/ai-assistant`          | AI shopping assistant with context-aware recommendations with products     |
-| `GET`        | `/api/delivery-options`      | Get available delivery methods                |
-| `GET/POST`   | `/api/cart-items`            | Get cart items or add an item                 |
-| `PUT/DELETE` | `/api/cart-items/:productId` | Update or remove a cart item                  |
-| `GET/POST`   | `/api/orders`                | Create and manage orders                      |
-| `GET`        | `/api/orders/:orderId`       | Get a single order                            |
-| `GET`        | `/api/payment-summary`       | Get order payment details                     |
-| `POST`       | `/api/reset`                 | Reset all data to seed state in development   |
+| Method       | Endpoint                     | Description                                              |
+| ------------ | ---------------------------- | -------------------------------------------------------- |
+| `GET`        | `/api/products`              | Get all products (supports `?search=keyword`)            |
+| `GET`        | `/api/ai-search`             | AI-powered semantic product search using `?query=`       |
+| `POST`       | `/api/ai-assistant`          | AI shopping assistant with context-aware product recommendations |
+| `GET`        | `/api/delivery-options`      | Get available delivery methods                           |
+| `GET/POST`   | `/api/cart-items`            | Get cart items or add an item                            |
+| `PUT/DELETE` | `/api/cart-items/:productId` | Update or remove a cart item                             |
+| `GET/POST`   | `/api/orders`                | Create and manage orders                                 |
+| `GET`        | `/api/orders/:orderId`       | Get a single order                                       |
+| `GET`        | `/api/payment-summary`       | Get order payment details                                |
+| `POST`       | `/api/reset`                 | Reset all data to seed state in development              |
 
 ## Frontend Route Handling
 
@@ -175,7 +173,7 @@ GET /api/products?search=shirt
 
 ```env
 NODE_ENV=development
-DATABASE_URI=your_mongodb_atlas_connection_string
+DATABASE_URI=your_mongodb_connection_string
 GEMINI_API_KEY=your_gemini_api_key_here
 PORT=7000
 ```
@@ -200,8 +198,9 @@ npm run zip                    # Create backup zip
 - Unknown API routes return JSON: `{ "error": "404 not found" }`
 
 ## Related Projects
-- [React Frontend — TypeScript](https://github.com/Srinivas-KR-Dev/react-ecommerce-typescript-ai)
-- [Backend — PostgreSQL + Prisma](https://github.com/Srinivas-KR-Dev/ecommerce-backend-postgres-prisma)
+
+- [React Frontend - TypeScript](https://github.com/Srinivas-KR-Dev/react-ecommerce-typescript-ai)
+- [Backend - PostgreSQL + Prisma](https://github.com/Srinivas-KR-Dev/ecommerce-backend-postgres-prisma)
 
 ## Architecture Diagram
 
@@ -211,13 +210,14 @@ flowchart LR
     B --> C[Controllers]
     C --> D[Mongoose ODM]
     D --> E[(MongoDB Atlas)]
-    C -->|retrieval layer (keyword + scoring)| D
+    C -->|keyword pre-filter| D
     C -->|grounded prompt| F[Gemini API]
     F -->|structured JSON| C
 ```
 
 ## Author
-**Srinivas K R** — [LinkedIn](https://www.linkedin.com/in/srinivas-kr-dev) · [GitHub](https://github.com/Srinivas-KR-Dev)
+
+**Srinivas K R** - [LinkedIn](https://www.linkedin.com/in/srinivas-kr-dev) · [GitHub](https://github.com/Srinivas-KR-Dev)
 
 ## License
 
