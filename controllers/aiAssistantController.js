@@ -46,6 +46,8 @@ const STOP_WORDS = new Set([
 ]);
 
 const MAX_CANDIDATE_PRODUCTS = 40;
+
+// Maps product keywords to simple display categories for the AI prompt.
 const CATEGORY_MAP = [
   [['shoes', 'footwear', 'sneakers', 'heels', 'sandals', 'flats'], 'Footwear'],
   [['tshirts', 'shirts', 'sweater', 'hoodie', 'pants', 'shorts', 'dress'], 'Clothing'],
@@ -55,6 +57,7 @@ const CATEGORY_MAP = [
   [['sports', 'basketball', 'ball', 'sports equipment'], 'Sports'],
 ];
 
+// Converts simple plurals to singular words for easier matching.
 const normalizeToken = (token) => {
   if (token.length > 3 && token.endsWith('s')) {
     return token.slice(0, -1);
@@ -63,6 +66,7 @@ const normalizeToken = (token) => {
   return token;
 };
 
+// Finds a readable category for each product using keywords and product name.
 const getProductCategory = (product) => {
   const keywords = product.keywords || [];
 
@@ -81,6 +85,7 @@ const getProductCategory = (product) => {
   return 'General';
 };
 
+// Converts a user message or product text into useful searchable words.
 const getSearchTokens = (message) =>
   message
     .toLowerCase()
@@ -89,6 +94,7 @@ const getSearchTokens = (message) =>
     .map(normalizeToken)
     .filter((token) => token.length > 2 && !STOP_WORDS.has(token));
 
+// Ranks products locally before sending candidates to Gemini.
 const getLocalMatches = (message, products) => {
   const tokens = getSearchTokens(message);
 
@@ -112,6 +118,7 @@ const getLocalMatches = (message, products) => {
     .map(({ product }) => product);
 };
 
+// Builds the grounded prompt using only selected candidate products.
 const buildPrompt = (message, products) => {
   const lines = products.map(
     (product) =>
@@ -138,6 +145,7 @@ ${lines.join('\n\n')}
 `;
 };
 
+// Safely converts Gemini's JSON text into a usable reply and id list.
 const parseAiResponse = (text) => {
   const cleaned = text.replace(/```json|```/g, '').trim();
   const parsed = JSON.parse(cleaned);
@@ -150,6 +158,7 @@ const parseAiResponse = (text) => {
   };
 };
 
+// Chooses how many products should be sent to Gemini.
 const getCandidateProducts = (allProducts, localMatches) => {
   if (localMatches.length > 0) {
     return localMatches.slice(0, 12);
@@ -162,6 +171,7 @@ const getCandidateProducts = (allProducts, localMatches) => {
   return allProducts.slice(0, MAX_CANDIDATE_PRODUCTS);
 };
 
+// Builds a useful local response if Gemini fails or returns invalid JSON.
 const buildFallbackResponse = (message, products) => {
   const localMatches = getLocalMatches(message, products).slice(0, 4);
 
@@ -181,6 +191,7 @@ const buildFallbackResponse = (message, products) => {
 };
 
 const aiAssistant = async (req, res, next) => {
+  // Step 1: Read and validate the user's chat message.
   const { message } = req.body;
 
   if (!message?.trim()) {
@@ -190,15 +201,18 @@ const aiAssistant = async (req, res, next) => {
   let candidateProducts = [];
 
   try {
+    // Step 2: Fetch products and rank the most relevant candidates locally.
     const allProducts = await Product.find({}).select('-_id').lean();
     const localMatches = getLocalMatches(message.trim(), allProducts);
     candidateProducts = getCandidateProducts(allProducts, localMatches);
 
+    // Step 3: Send the user message and grounded product context to Gemini.
     const prompt = buildPrompt(message.trim(), candidateProducts);
     const result = await model.generateContent(prompt);
     const text = result.response.text().trim();
     let aiResponse;
 
+    // Step 4: Parse Gemini's structured response or use local fallback.
     try {
       aiResponse = parseAiResponse(text);
     } catch {
@@ -207,12 +221,14 @@ const aiAssistant = async (req, res, next) => {
       return res.status(200).json(fallback);
     }
 
+    // Step 5: Map Gemini-selected ids back to real MongoDB products.
     const productsById = new Map(candidateProducts.map((product) => [product.id, product]));
     const matchedProducts = aiResponse.matchedIds
       .map((id) => productsById.get(id))
       .filter(Boolean)
       .slice(0, 4);
 
+    // Step 6: Return the assistant reply with matched catalog products.
     return res.status(200).json({
       reply:
         aiResponse.reply ||
@@ -224,6 +240,7 @@ const aiAssistant = async (req, res, next) => {
   } catch (error) {
     console.error('AI Assistant Error:', error);
 
+    // Step 7: If Gemini fails after candidates are ready, return local fallback.
     if (candidateProducts.length > 0) {
       return res.status(200).json(
         buildFallbackResponse(message.trim(), candidateProducts),
