@@ -6,19 +6,19 @@ const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
 
 const aiSearch = async (req, res, next) => {
   try {
-    // Step 1: Read and validate the search query from the URL.
+    //Read and validate the search query from the URL.
     const { query } = req.query;
 
     if (!query?.trim()) {
       return res.status(400).json({ error: 'Query parameter is required' });
     }
 
-    // Step 2: Fetch only the product fields Gemini needs for matching.
+    //Fetch only the product fields Gemini needs for matching.
     const products = await Product.find({})
       .select('id name keywords priceCents -_id')
       .lean();
 
-    // Step 3: Build a strict prompt so Gemini returns only matching product ids.
+    //Build a strict prompt so Gemini returns only matching product ids.
     const prompt = `
 You are a strict product search assistant for an Indian ecommerce store.
 Prices are stored as priceCents integers. To convert to INR: divide by 100.
@@ -53,13 +53,13 @@ Products (id, name, keywords, priceCents):
 ${JSON.stringify(products)}
 `;
 
-    // Step 4: Ask Gemini to choose matching product ids.
+    //Ask Gemini to choose matching product ids.
     const result = await model.generateContent(prompt);
     const text = result.response.text().trim();
 
     let matchedIds;
 
-    // Step 5: Parse Gemini's response safely as a JSON array.
+    //Parse Gemini's response safely as a JSON array.
     try {
       const cleaned = text.replace(/```json|```/g, '').trim();
       matchedIds = JSON.parse(cleaned);
@@ -71,24 +71,24 @@ ${JSON.stringify(products)}
       return res.status(500).json({ error: 'Failed to parse AI response' });
     }
 
-    // Step 6: Return an empty result if Gemini found no matches.
+    //Return an empty result if Gemini found no matches.
     if (matchedIds.length === 0) {
       return res.status(200).json([]);
     }
 
-    // Step 7: Fetch full product documents from MongoDB using matched ids.
+    //Fetch full product documents from MongoDB using matched ids.
     const matchedProducts = await Product.find({
       id: { $in: matchedIds },
     })
       .select('-_id')
       .lean();
 
-    // Step 8: Return real MongoDB products to the frontend.
+    //Return real MongoDB products to the frontend.
     res.status(200).json(matchedProducts);
   } catch (error) {
     console.error('AI Search Error:', error);
 
-    // Step 9: Return a friendly response for Gemini quota/rate-limit errors.
+    //Return a friendly response for Gemini quota/rate-limit errors.
     const is429 =
       error?.message?.includes('429') ||
       error?.message?.includes('Too Many Requests') ||
